@@ -1,0 +1,44 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.1"
+
+    defaultConfig {
+        applicationId "kr.wdream.wplusshop"
+        minSdkVersion 15
+        targetSdkVersion 24
+        versionCode 10102
+        versionName "1.1.2"
+        multiDexEnabled true
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    productFlavors {
+    }
+    dexOptions {
+        // dex의 크기를 늘리기 위한 설정(2^16개 초과)
+        jumboMode true
+        // 앱 구동 시 자바 할당 힙을 지정
+        javaMaxHeapSize "4g"
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    //    compile 'com.google.android.gms:play-services:7.8.0'
+    compile project(':WebViewAllCapture')
+    compile project(':lib')
+    compile 'com.google.android.gms:play-services-gcm:8.4.0'
+    compile 'com.google.android.gms:play-services-maps:8.4.0'
+    compile 'com.android.support:appcompat-v7:23.3.0'
+    compile 'com.android.support:multidex:1.0.0'
+    compile 'org.jbundle.util.osgi.wrapped:org.jbundle.util.osgi.wrapped.org.apache.http.client:4.1.2'
+    compile 'com.google.zxing:core:3.3.0'
+    compile 'com.journeyapps:zxing-android-embedded:3.2.0@aar'
+}

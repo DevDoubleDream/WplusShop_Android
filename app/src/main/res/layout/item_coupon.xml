@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingRight="20.01dp"
+    android:paddingLeft="20.01dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txt_name"
+        android:textColor="@color/red"
+        android:textSize="12.006sp"
+        android:textStyle="bold"
+        android:layout_marginTop="11.339dp"
+        android:layout_marginBottom="8.3375dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txt_date"
+        android:textColor="@color/red"
+        android:textSize="9.338sp"
+        android:layout_below="@+id/txt_name"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="6.67dp"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/img_coupon"
+        android:layout_below="@id/txt_date"
+        android:scaleType="fitXY"
+        android:layout_marginBottom="22.011dp"/>
+
+    <FrameLayout
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:id="@+id/lyt_banner"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/icon_banner_r"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txt_banner"
+            android:layout_gravity="top|center"
+            android:text="사용대기"
+            android:textColor="@color/white"
+            android:textSize="10.672sp"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"/>
+    </FrameLayout>
+
+
+</RelativeLayout>

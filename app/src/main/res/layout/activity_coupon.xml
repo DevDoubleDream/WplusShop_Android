@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:background="@color/red">
+        <include
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            layout="@layout/header_single"/>
+    </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            android:layout_weight="10">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/txt_count"
+                android:text="총 0개"
+                android:gravity="right|center"
+                android:textColor="@color/red"
+                android:layout_marginTop="26.013dp"
+                android:layout_marginBottom="16.008dp"
+                android:layout_marginRight="20.01dp"
+                android:layout_marginLeft="20.01dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/red"></LinearLayout>
+
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/listCoupon"
+                android:divider="@color/red"
+                android:dividerHeight="1dp"></ListView>
+        </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:gravity="center"
+        android:layout_marginTop="27.0135dp"
+        android:layout_marginBottom="41.0205dp">
+
+        <ImageButton
+            android:layout_width="30.015dp"
+            android:layout_height="30.015dp"
+            android:id="@+id/btn_before"
+            android:src="@drawable/icon_arrow_l"
+            android:background="@drawable/btn_green"
+            android:layout_marginRight="10dp"/>
+
+        <Button
+            android:layout_width="30.015dp"
+            android:layout_height="30.015dp"
+            android:id="@+id/btn_first"
+            android:textColor="@color/red"
+            android:textSize="10.672sp"
+            android:gravity="center"
+            android:background="@drawable/btn_white"
+            android:layout_marginRight="10dp"/>
+
+        <Button
+            android:layout_width="30.015dp"
+            android:layout_height="30.015dp"
+            android:id="@+id/btn_second"
+            android:textColor="@color/red"
+            android:textSize="10.672sp"
+            android:gravity="center"
+            android:background="@drawable/btn_white"
+            android:layout_marginRight="10dp"/>
+
+        <Button
+            android:layout_width="30.015dp"
+            android:layout_height="30.015dp"
+            android:id="@+id/btn_third"
+            android:textColor="@color/red"
+            android:textSize="10.672sp"
+            android:gravity="center"
+            android:background="@drawable/btn_white"
+            android:layout_marginRight="10dp"/>
+
+        <Button
+            android:layout_width="30.015dp"
+            android:layout_height="30.015dp"
+            android:id="@+id/btn_fourth"
+            android:textColor="@color/red"
+            android:textSize="10.672sp"
+            android:gravity="center"
+            android:background="@drawable/btn_white"
+            android:layout_marginRight="10dp"/>
+
+        <Button
+            android:layout_width="30.015dp"
+            android:layout_height="30.015dp"
+            android:id="@+id/btn_fifth"
+            android:textColor="@color/red"
+            android:textSize="10.672sp"
+            android:gravity="center"
+            android:background="@drawable/btn_white"
+            android:layout_marginRight="10dp"/>
+
+        <ImageButton
+            android:layout_width="30.015dp"
+            android:layout_height="30.015dp"
+            android:id="@+id/btn_next"
+            android:src="@drawable/icon_arrow_r"
+            android:background="@drawable/btn_green"/>
+
+    </LinearLayout>
+</LinearLayout>
