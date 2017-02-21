@@ -2,6 +2,7 @@ package kr.wdream.wplusshop.app;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -40,6 +41,7 @@ import java.util.TimerTask;
 
 import kr.wdream.wplusshop.R;
 import kr.wdream.wplusshop.app.dialog.CompleteDialog;
+import kr.wdream.wplusshop.app.dialog.NFCCheckDialog;
 import kr.wdream.wplusshop.app.dialog.NFCDialog;
 import kr.wdream.wplusshop.common.AuthTask;
 import kr.wdream.wplusshop.common.Capture;
@@ -105,11 +107,18 @@ public class PayActivity extends Activity implements View.OnClickListener, Dialo
 
         initNFC();
 
+        showDialogs();
+
         getIntentData();
 
         getCardInfo();
 
         initView();
+    }
+
+    private void showDialogs(){
+        NFCCheckDialog dialog = new NFCCheckDialog(PayActivity.this);
+        dialog.show();
     }
 
     private void getCardInfo(){
