@@ -5,37 +5,75 @@
     android:orientation="vertical"
     android:focusable="true"
     android:focusableInTouchMode="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="0dp"
+            android:layout_weight="1">
+            <include
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                layout="@layout/header_single"/>
+        </LinearLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="10">
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1">
-                <include
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    layout="@layout/header_single"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="10"
+                android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:background="#f0f0f0">
+                android:background="#f0f0f0"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingTop="40dp">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginTop="40dp"
-                    android:background="#ffffff">
+                    android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="#ffffff"
+                    android:padding="20dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:id="@+id/lytTop"
+                        android:orientation="horizontal"
+                        android:background="@android:color/white">
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp"
+                            android:text="회원 로그인"
+                            android:textColor="#F34950"
+                            android:background="@android:color/transparent"
+                            android:gravity="center"
+                            android:id="@+id/btnLogin"
+                            android:layout_marginRight="20dp" />
+
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp"
+                            android:id="@+id/btnCardLogin"
+                            android:text="카드 로그인"
+                            android:textColor="#919191"
+                            android:background="@android:color/transparent"
+                            android:gravity="center"/>
+                    </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="20dp"
                         android:orientation="vertical">
+
                         <EditText
                             android:id="@+id/login_id"
                             android:layout_width="280dp"
@@ -44,9 +82,10 @@
                             android:layout_marginTop="10dp"
                             android:inputType="textUri"
                             android:imeOptions="actionNext"
-                            android:maxLength="12"
+                            android:maxLength="16"
                             android:paddingLeft="10dp"
                             android:background="@drawable/stroke_gray"/>
+
                         <EditText
                             android:id="@+id/login_pw"
                             android:layout_width="280dp"
@@ -62,6 +101,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center_vertical"
                             android:layout_marginTop="20dp">
+
                             <LinearLayout
                                 android:id="@+id/lyt_btn_autologin"
                                 android:layout_width="0dp"
@@ -74,31 +114,36 @@
                                     android:layout_width="24dp"
                                     android:layout_height="24dp"
                                     android:src="@drawable/auto_off"/>
+
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="자동 로그인"
                                     android:textColor="#919191"
                                     android:textSize="16sp"
-                                    android:layout_marginLeft="8dp"/>
+                                    android:layout_marginLeft="8dp"
+                                    android:id="@+id/textView" />
                             </LinearLayout>
+
                             <LinearLayout
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1">
                                 <LinearLayout
                                     android:id="@+id/btn_login"
-                                    android:layout_width="140dp"
+                                    android:layout_width="match_parent"
                                     android:layout_height="50dp"
                                     android:background="#f34950"
                                     android:gravity="center">
+
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:text="로그인"
                                         android:textColor="#ffffff"
                                         android:textSize="17sp"
-                                        android:textStyle="bold"/>
+                                        android:textStyle="bold"
+                                        android:id="@+id/textView2" />
                                 </LinearLayout>
                             </LinearLayout>
                         </LinearLayout>
@@ -110,6 +155,7 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:id="@+id/lytFind"
                             android:orientation="horizontal"
                             android:gravity="center"
                             android:layout_marginTop="20dp">
@@ -135,6 +181,10 @@
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
+                </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
+        </RelativeLayout>
+    </LinearLayout>
+
+
 </LinearLayout>

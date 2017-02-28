@@ -73,6 +73,7 @@
         <activity android:name=".app.SetPassLock"/>
         <activity android:name=".app.PassLockNumber"/>
         <activity android:name=".app.NoticeList"/>
+        <activity android:name=".app.CardLoginMain"/>
 
 
         <!-- [START gcm_receiver] -->

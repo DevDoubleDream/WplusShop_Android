@@ -36,7 +36,6 @@ import java.util.List;
 
 import it.moondroid.coverflow.components.ui.containers.FeatureCoverFlow;
 import kr.wdream.wplusshop.R;
-import kr.wdream.wplusshop.common.CDialog;
 import kr.wdream.wplusshop.common.CoverFlowAdapter;
 import kr.wdream.wplusshop.common.DBManager;
 import kr.wdream.wplusshop.common.util.HotDealUtil;
@@ -320,7 +319,6 @@ public class TodayDeal extends Activity implements View.OnTouchListener{
         intent.putExtra("SUMMARY", summary);
         intent.putExtra("PICTURE", picture);
 //        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(locationURI));
-        CDialog.showLoading(this);
         startActivity(intent);
     }
 }

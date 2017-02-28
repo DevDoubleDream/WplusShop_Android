@@ -60,6 +60,7 @@ public class PayActivity extends Activity implements View.OnClickListener, Dialo
     //최초 적립, 결제 분기처리
     public static final int STATE_PAY  = 0;
     public static final int STATE_SAVE = 1;
+    public static final int STATE_CARD_SAVE = 2;
 
     private int STATE;
 
@@ -111,7 +112,8 @@ public class PayActivity extends Activity implements View.OnClickListener, Dialo
 
         getIntentData();
 
-        getCardInfo();
+        if (STATE != PayActivity.STATE_CARD_SAVE)
+            getCardInfo();
 
         initView();
     }
@@ -131,11 +133,12 @@ public class PayActivity extends Activity implements View.OnClickListener, Dialo
 
         STATE = getIntent.getIntExtra("STATE", 0);
 
-        remainPoint = getIntent.getStringExtra("point");
-        Log.d(TAG, "CardInfo CardNo : " + CardInfo.getCardNo());
-        intRemainPoint = Integer.parseInt(remainPoint);
-
-        Log.d(TAG, "RemainPoint : " + intRemainPoint);
+        if (STATE == PayActivity.STATE_CARD_SAVE) {
+            cardNo = getIntent.getStringExtra("cardNo");
+            cardPW = getIntent.getStringExtra("cardPw");
+        }
+            remainPoint = getIntent.getStringExtra("point");
+            intRemainPoint = Integer.parseInt(remainPoint);
 
     }
 
@@ -151,7 +154,7 @@ public class PayActivity extends Activity implements View.OnClickListener, Dialo
         }
 
         txtCardNo = (TextView)findViewById(R.id.txt_card_no);
-        txtCardNo.setText("회원번호 " + Main.userInfo.get("card_no") + " 님");
+        txtCardNo.setText("회원번호 " + cardNo + " 님");
         txtPoint = (TextView)findViewById(R.id.txt_point);
         txtPoint.setText(remainPoint + " Point 사용하실 수 있습니다.");
         //결제 및 적립하기 뷰 초기화
@@ -262,8 +265,6 @@ public class PayActivity extends Activity implements View.OnClickListener, Dialo
                 String authKey = code.substring(0, temp);
                 stCode = code.substring(temp + 1);
 
-
-
                 new AuthTask(handler, authKey, stCode).execute();
             }
 
@@ -321,7 +322,7 @@ public class PayActivity extends Activity implements View.OnClickListener, Dialo
                 }
             }
 
-            if (STATE == STATE_SAVE) {
+            if (STATE == STATE_SAVE || STATE == STATE_CARD_SAVE) {
                 try {
                     HashMap<String,String> resultPay = PointUtil.selectSave(paramSave);
 
@@ -379,6 +380,22 @@ public class PayActivity extends Activity implements View.OnClickListener, Dialo
 //                }else{
 //                    Toast.makeText(context, "적립 실패\n관리자에게 문의하세요.", Toast.LENGTH_SHORT).show();
 //                }
+            }
+
+            if (STATE == STATE_CARD_SAVE) {
+                dialog = new CompleteDialog(PayActivity.this, cardNo, STATE, usePoint, remainPoint);
+                dialog.show();
+
+
+                Timer timer = new Timer();
+                TimerTask task = new TimerTask() {
+                    @Override
+                    public void run() {
+                        dialog.dismiss();
+                        finish();
+                    }
+                };
+                timer.schedule(task, 3000);
             }
         }
     }
@@ -485,7 +502,7 @@ public class PayActivity extends Activity implements View.OnClickListener, Dialo
                         if (STATE == STATE_PAY) {
                             Log.d(TAG, "BTN_STATE : " + STATE);
                             startPay();
-                        }else if(STATE == STATE_SAVE){
+                        }else{
                             Log.d(TAG, "BTN_STATE : " + STATE);
                             startSave();
                         }

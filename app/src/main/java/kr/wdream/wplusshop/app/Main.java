@@ -38,9 +38,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import kr.wdream.wplusshop.R;
-import kr.wdream.wplusshop.common.util.AppInfoUtil;
 import kr.wdream.wplusshop.common.BackPressCloseHandler;
-import kr.wdream.wplusshop.common.CDialog;
 import kr.wdream.wplusshop.common.DBManager;
 import kr.wdream.wplusshop.common.LoginUtil;
 import kr.wdream.wplusshop.common.QuickstartPreferences;
@@ -49,6 +47,8 @@ import kr.wdream.wplusshop.common.RegistrationIntentService;
 import kr.wdream.wplusshop.common.util.WcardUtil;
 
 public class Main extends Activity implements View.OnClickListener{
+
+    public static Main main;
 
     public static ArrayList<Activity> locationHistory = new ArrayList<Activity>();
 
@@ -96,6 +96,11 @@ public class Main extends Activity implements View.OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
+        main = this;
+
+        if(CardLoginMain.cardLoginMain != null)
+            CardLoginMain.cardLoginMain.finish();
+
         if (android.os.Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy =
                     new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -107,9 +112,6 @@ public class Main extends Activity implements View.OnClickListener{
         }else{
             registBroadcastReceiver();
         }
-
-        if(CDialog.showLoading(this))
-            CDialog.hideLoading();
 
         new GetMallDomain().execute();
 
@@ -165,8 +167,6 @@ public class Main extends Activity implements View.OnClickListener{
         txtLMenu    = (TextView) findViewById(R.id.txt_use);
         txtRMenu    = (TextView) findViewById(R.id.txt_wzone);
 
-
-
         getInstanceIdToken();
 
         lyt_center = (LinearLayout)findViewById(R.id.lyt_btn_viz);
@@ -202,9 +202,6 @@ public class Main extends Activity implements View.OnClickListener{
                 return true;
             }
         });
-        // 로그인 설정
-//        setLogin();
-
     }
 
     private void checkPermission(){
@@ -324,7 +321,7 @@ public class Main extends Activity implements View.OnClickListener{
                     Toast.makeText(this, "로그아웃 되었습니다.", Toast.LENGTH_SHORT).show();
                 } else {
                     intent = new Intent(this, Login.class);
-                    CDialog.showLoading(this);
+                    intent.putExtra("FROM", true);
                     startActivity(intent);
 
                 }
@@ -341,7 +338,6 @@ public class Main extends Activity implements View.OnClickListener{
             // ======================메뉴 버튼 시작===========================
             case R.id.btn_setting: // 쇼핑몰 설정
                 intent = new Intent(this, Setting.class);
-                CDialog.showLoading(this);
                 startActivity(intent);
                 drawerLayout.closeDrawers();
                 break;
@@ -349,9 +345,9 @@ public class Main extends Activity implements View.OnClickListener{
                 if(userInfo.get("user_no").equals("")){
                     intent = new Intent(this, Login.class);
                     intent.putExtra("locationActivity", "Point");
+                    intent.putExtra("FROM", true);
                 }else{
                     intent = new Intent(this, Point.class);
-                    CDialog.showLoading(this);
                     startActivity(intent);
                 }
                 break;
@@ -361,7 +357,6 @@ public class Main extends Activity implements View.OnClickListener{
             case R.id.btn_menu_store:   // 가맹점
                 intent = new Intent(this, Use.class);
                 intent.putExtra("menuId", "0");
-                CDialog.showLoading(this);
                 startActivity(intent);
                 drawerLayout.closeDrawers();
                 break;
@@ -369,11 +364,11 @@ public class Main extends Activity implements View.OnClickListener{
                 if(userInfo.get("user_no").equals("")){
                     intent = new Intent(this, Login.class);
                     intent.putExtra("locationActivity", "Use");
+                    intent.putExtra("FROM", true);
                 }else
                     intent = new Intent(this, Use.class);
 
                 intent.putExtra("menuId", "1");
-                CDialog.showLoading(this);
                 startActivity(intent);
                 drawerLayout.closeDrawers();
                 break;
@@ -381,29 +376,28 @@ public class Main extends Activity implements View.OnClickListener{
                 if(userInfo.get("user_no").equals("")){
                     intent = new Intent(this, Login.class);
                     intent.putExtra("locationActivity", "Use");
+                    intent.putExtra("FROM", true);
                 }else
                     intent = new Intent(this, Use.class);
 
                 intent.putExtra("menuId", "2");
-                CDialog.showLoading(this);
                 startActivity(intent);
                 drawerLayout.closeDrawers();
                 break;
             case R.id.btn_menu_donation:
                 if(userInfo.get("user_no").equals("")){
                     intent = new Intent(this, Login.class);
+                    intent.putExtra("FROM", true);
                     intent.putExtra("locationActivity", "Use");
                 }else
                     intent = new Intent(this, Use.class);
 
                 intent.putExtra("menuId", "3");
-                CDialog.showLoading(this);
                 startActivity(intent);
                 drawerLayout.closeDrawers();
                 break;
             case R.id.btn_menu_today:
                 intent = new Intent(this, TodayDeal.class);
-                CDialog.showLoading(this);
                 startActivity(intent);
                 drawerLayout.closeDrawers();
                 break;
@@ -413,7 +407,6 @@ public class Main extends Activity implements View.OnClickListener{
                 intent.putExtra("TITLE", "가족의 일상에서 필요로 하는 제품을 판매하는 쇼핑몰.");
                 intent.putExtra("SUMMARY", "");
                 intent.putExtra("PICTURE", "");
-                CDialog.showLoading(this);
                 startActivity(intent);
 
                 break;
@@ -489,50 +482,47 @@ public class Main extends Activity implements View.OnClickListener{
             case R.id.lyt_btn_store:
                 intent = new Intent(this, Use.class);
                 intent.putExtra("menuId", "0");
-                CDialog.showLoading(this);
                 startActivity(intent);
                 break;
             case R.id.lyt_btn_payment:
                 if(userInfo.get("user_no").equals("")){
                     intent = new Intent(this, Login.class);
                     intent.putExtra("locationActivity", "Use");
+                    intent.putExtra("FROM", true);
                 }else
                     intent = new Intent(this, Use.class);
 
                 intent.putExtra("menuId", "1");
-                CDialog.showLoading(this);
                 startActivity(intent);
                 break;
             case R.id.lyt_btn_gift:
                 if(userInfo.get("user_no").equals("")){
                     intent = new Intent(this, Login.class);
                     intent.putExtra("locationActivity", "Use");
+                    intent.putExtra("FROM", true);
                 }else
                     intent = new Intent(this, Use.class);
 
                 intent.putExtra("menuId", "2");
-                CDialog.showLoading(this);
                 startActivity(intent);
                 break;
             case R.id.lyt_btn_donation:
                 if(userInfo.get("user_no").equals("")){
                     intent = new Intent(this, Login.class);
                     intent.putExtra("locationActivity", "Use");
+                    intent.putExtra("FROM", true);
                 }else
                     intent = new Intent(this, Use.class);
 
                 intent.putExtra("menuId", "3");
-                CDialog.showLoading(this);
                 startActivity(intent);
                 break;
             case R.id.lyt_btn_setting:
                 intent = new Intent(this, UserSetting.class);
-                CDialog.showLoading(this);
                 startActivity(intent);
                 break;
             case R.id.btn_txt_pointsearch:
                 intent = new Intent(this, Point.class);
-                CDialog.showLoading(this);
                 startActivity(intent);
                 break;
             case R.id.btn_txt_charge:
@@ -540,7 +530,6 @@ public class Main extends Activity implements View.OnClickListener{
                 break;
             case R.id.lyt_btn_today:
                 intent = new Intent(this, TodayDeal.class);
-                CDialog.showLoading(this);
                 startActivity(intent);
                 break;
             case R.id.lyt_btn_wmart:
@@ -549,7 +538,6 @@ public class Main extends Activity implements View.OnClickListener{
                 intent.putExtra("TITLE", "");
                 intent.putExtra("SUMMARY", "");
                 intent.putExtra("PICTURE", "");
-                CDialog.showLoading(this);
                 startActivity(intent);
                 break;
             case R.id.lyt_btn_viz:
@@ -633,12 +621,23 @@ public class Main extends Activity implements View.OnClickListener{
     @Override
     protected void onResume() {
         super.onResume();
-
-        Log.d(TAG, "userIfno : " + userInfo.get("user_viz_at"));
-
         if("Y".equals(userInfo.get("user_viz_at"))){
             lyt_center.setVisibility(View.VISIBLE);
             lyt_viz.setVisibility(View.VISIBLE);
+        }
+
+        Intent getIntent = getIntent();
+        if (getIntent.getSerializableExtra("testArray") != null) {
+            HashMap<String,String> loginResult = (HashMap<String,String>) getIntent.getSerializableExtra("testArray");
+            Main.userInfo.put("user_nm", loginResult.get("user_nm"));
+            Main.userInfo.put("user_id", loginResult.get("user_id"));
+            Main.userInfo.put("user_pw", loginResult.get("user_pw"));
+            Main.userInfo.put("user_no", loginResult.get("user_no"));
+            Main.userInfo.put("card_no", loginResult.get("user_cardno"));
+            Main.userInfo.put("user_grade", loginResult.get("user_grade"));
+            Main.userInfo.put("user_dmn", loginResult.get("user_dmn"));
+            Main.userInfo.put("user_cpoint", loginResult.get("user_cpoint"));
+            Main.userInfo.put("user_viz_at", loginResult.get("user_viz_at"));
         }
 
         LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
@@ -655,8 +654,6 @@ public class Main extends Activity implements View.OnClickListener{
         new GetMallDomain().execute();
 
 
-        if(CDialog.showLoading(this))
-            CDialog.hideLoading();
     }
 
     @Override

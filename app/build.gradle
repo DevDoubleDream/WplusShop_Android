@@ -9,8 +9,8 @@ android {
         applicationId "kr.wdream.wplusshop"
         minSdkVersion 15
         targetSdkVersion 24
-        versionCode 10102
-        versionName "1.1.2"
+        versionCode 10201
+        versionName "1.2.1"
         multiDexEnabled true
     }
     buildTypes {

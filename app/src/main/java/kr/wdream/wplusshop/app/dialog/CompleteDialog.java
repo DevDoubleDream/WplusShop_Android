@@ -50,7 +50,6 @@ public class CompleteDialog extends Dialog {
             totalPoint = Integer.parseInt(remainPoint) - Integer.parseInt(point);
             double savePoint = Integer.parseInt(point) * 0.055;
             totalPoint = totalPoint + savePoint;
-
         }else{
             totalPoint = Integer.parseInt(remainPoint) + (Integer.parseInt(point) * 0.055);
         }

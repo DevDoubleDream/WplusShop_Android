@@ -20,7 +20,6 @@ import java.util.HashMap;
 
 import kr.wdream.wplusshop.R;
 import kr.wdream.wplusshop.app.dialog.ChoiceDialog;
-import kr.wdream.wplusshop.common.CDialog;
 import kr.wdream.wplusshop.common.LoginUtil;
 import kr.wdream.wplusshop.common.PointSendUtil;
 import kr.wdream.wplusshop.common.StoreUtil;
@@ -157,7 +156,6 @@ public class Use extends Activity implements View.OnClickListener{
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.icon_head_left:
-                CDialog.showLoading(this);
                 finish();
                 break;
         }
@@ -308,7 +306,6 @@ public class Use extends Activity implements View.OnClickListener{
             case R.id.lyt_payment:
                 if(Main.userInfo.get("user_no").equals("")){
                     intent = new Intent(this, Login.class);
-                    CDialog.showLoading(this);
                     startActivity(intent);
                 }
                 else
@@ -317,7 +314,6 @@ public class Use extends Activity implements View.OnClickListener{
             case R.id.lyt_gift:
                 if(Main.userInfo.get("user_no").equals("")){
                     intent = new Intent(this, Login.class);
-                    CDialog.showLoading(this);
                     startActivity(intent);
                 }
                 else
@@ -326,7 +322,6 @@ public class Use extends Activity implements View.OnClickListener{
             case R.id.lyt_donation:
                 if(Main.userInfo.get("user_no").equals("")){
                     intent = new Intent(this, Login.class);
-                    CDialog.showLoading(this);
                     startActivity(intent);
                 }
                 else
@@ -345,12 +340,10 @@ public class Use extends Activity implements View.OnClickListener{
                 break;
             case R.id.btn_user_regist:
                 intent = new Intent(this, UserRegist.class);
-                CDialog.showLoading(this);
                 startActivity(intent);
                 break;
             case R.id.btn_user_list:
                 intent = new Intent(this, UserList.class);
-                CDialog.showLoading(this);
                 startActivity(intent);
                 break;
 
@@ -398,7 +391,6 @@ public class Use extends Activity implements View.OnClickListener{
 
         Intent intent = new Intent(this, StoreList.class);
         intent.putExtra("storeNM", cutStr);
-        CDialog.showLoading(this);
         startActivity(intent);
     }
 
@@ -413,8 +405,6 @@ public class Use extends Activity implements View.OnClickListener{
         if(card_no != null) ((EditText) findViewById(R.id.txt_cardno_target)).setText(card_no);
         card_no = "";
 
-        if(CDialog.showLoading(this))
-            CDialog.hideLoading();
 
     }
 }

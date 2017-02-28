@@ -31,13 +31,12 @@ public class PointUtil {
             String message          = result.getString("MESSAGE");
 
             pointResult.put("code", code);
-            pointResult.put("message", message);
+            pointResult.put("msg", message);
 
             Log.d("Wcard", "code : " + code);
 
             if (code.equals("0000")){
                 JSONObject data     = responseJSON.getJSONObject("DATA");
-//                pointResult.put("CPOINT", data.getString("CPOINT"));
                 JSONObject point    = data.getJSONObject("POINT");
                 pointResult.put("CP", point.getString("CPOINT"));
                 pointResult.put("WP", point.getString("WPOINT"));
